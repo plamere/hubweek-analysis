@@ -24,24 +24,29 @@ def perform_analysis(file):
 
     if not os.path.exists(json_path):
 
-        print 'analyzing', os.path.basename(file)
-        f = open(file, 'rb')
-        response = en.post('track/upload', track=f, filetype='wav')
-        f.close()
+        try:
+            print 'analyzing', os.path.basename(file)
+            f = open(file, 'rb')
+            response = en.post('track/upload', track=f, filetype='wav')
+            f.close()
+            trid = response['track']['id']
+            track = wait_for_analysis(trid)
+            out = {
+                'trid': trid,
+                'path': file,
+                'file': os.path.basename(file),
+                'summary': track
+            }
+            print '  writing', json_path
+            rfile = open(json_path, 'w')
+            print >>rfile, json.dumps(out)
+            rfile.close()
+        except json.scanner.JSONDecodeError:
+            print 'trouble analyzing', file
+            print 'skipping'
+            print
 
-        trid = response['track']['id']
-        track = wait_for_analysis(trid)
 
-        out = {
-            'trid': trid,
-            'path': file,
-            'file': os.path.basename(file),
-            'summary': track
-        }
-        print '  writing', json_path
-        rfile = open(json_path, 'w')
-        print >>rfile, json.dumps(out)
-        rfile.close()
     else:
         print 'skipping', os.path.basename(file)
     return
