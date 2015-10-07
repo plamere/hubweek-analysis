@@ -45,6 +45,10 @@ def perform_analysis(file):
             print 'trouble analyzing', file
             print 'skipping'
             print
+        except requests.exceptions.ProxyError:
+            print 'proxy trouble analyzing', file
+            print 'skipping'
+            print
 
 
     else:
