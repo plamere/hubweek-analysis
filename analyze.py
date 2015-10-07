@@ -18,11 +18,17 @@ def wait_for_analysis(id):
         time.sleep(1)
     return response['track']
 
+def is_too_big(path):
+    statinfo = os.stat(path)
+    return statinfo.st_size > 1024 * 1024 * 10
 
 def perform_analysis(file):
     json_path = file.replace('.wav', '.json')
 
     if not os.path.exists(json_path):
+        if is_too_big(file):
+            print 'too big', file
+            return
 
         try:
             print 'analyzing', os.path.basename(file)
