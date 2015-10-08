@@ -10,6 +10,13 @@ def recurse(path):
             f = open(path)
             js = f.read()
             obj = json.loads(js)
+            if 'path' in obj:
+                obj['s3_key'] = obj['path'].replace('spotify/', '').replace('.mp3', '.wav')
+                del obj['path']
+                del obj['file']
+            else:
+                print 'no path in', path
+
             f.close()
             all.append(obj)
     elif os.path.isdir(path):
