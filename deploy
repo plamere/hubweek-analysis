@@ -1,0 +1,1 @@
+s3cmd sync --acl-public indaba_analysis.json index.html dist s3://static.echonest.com/HUBWeek2015/

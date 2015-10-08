@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="dist/sp-bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" type="text/css" <link rel="shortcut icon" href="images/favicon.png">
+  <title HUBWeek Hackathon Dataset></title>
+</head>
+
+<body>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div id='intro'>
+    <div id='main' class="container">
+      <div id="jumbo-dialog">
+        <h2>HUBWeek Hackathon Dataset</h2>
+        <p>
+          For the HUBWeek hackathon, Spotify and Indaba have worked together to
+          provide a detailed set of analysis data for a number of loops and stems
+          in the <a href="https://www.conversesamplelibrary.com/">Converse Rubber Tracks
+            Sample library</a>. This analysis provides all
+          sorts of information about thousands of clips in the sample libarary.
+
+          <h3> Download the data</h3>
+          The dataset can be downloaded from
+          <a href='indaba_analysis.json' class='obtn obtn-primary'> indaba_analysis.json</a>
+
+          <h3> Audio Summary format</h3>
+          The Audio Summary is a list of JSON dictionarys, with one entry for each
+          clip. Here's a sample entry for one clip:
+          <pre>
+
+  {
+      "trid": "TRYNEOK15046EC68A6",
+      "path": "path/f76a2478-2abf-4353-9115-241e296b6200.wav",
+      "file": "f76a2478-2abf-4353-9115-241e296b6200.wav",
+      "summary": {
+          "status": "complete",
+          "analyzer_version": "3.2.2",
+          "samplerate": 44100,
+          "bitrate": 1411,
+          "id": "TRYNEOK15046EC68A6",
+          "audio_summary": {
+              "time_signature": 4,
+              "tempo": 110.852,
+              "energy": 0.8332200331407104,
+              "liveness": 0.38625211362015804,
+              "speechiness": 0.0798226549908122,
+              "acousticness": 0.0010461438678783968,
+              "danceability": 0.7057734977996617,
+              "instrumentalness": 0.8709852293855461,
+              "key": 11,
+              "duration": 42.0,
+              "loudness": -10.056,
+              "valence": 0.7163618350351479,
+              "mode": 0
+          },
+          "md5": "3fcbbe033d2896050ed50286c4e392d1"
+      }
+    }
+          </pre>
+          <h3> Interpreting the analysis </h3>
+          The <i>trid</i> is the Echo Nest Track ID. Use this to retrive the
+            detailed analysis of the track (see below).  The <i> file </i> field contains
+            the Indaba ID of the clip.  Use this ID to associate the analysis data with
+            a specific Indaba clip.
+
+
+            <p>
+            The track analysis includes summary information about a track including
+          tempo, key signature, time signature mode, danceability, loudness,
+          liveness, speechinesss, acousticness and energy.
+            Note that for short samples, not all data can be calculated. Missing data will be returned
+            with a null value.
+              <br>
+            <div>
+              <b> TBD</b> <i>How does a developer map between
+              the Indaba data and the analysis data.</i>
+           </div>
+          <h3> Retrieving the detailed analysis </h3>
+          Associated with each clip is the detailed
+          information about the song structure (sections) beat structure
+          (bars, beats tatums) and detailed info about timbre, pitch and
+          loudness envelope (segment). To retrieve this information use the
+          <a href="http://developer.echonest.com/docs/v4/track.html#profile">
+            track/profile
+          </a>
+          call of the Echo Nest API to retrieve track information.
+          Included in the information is an analysis url that can be used
+          to retrieve the detailed analysis. The analysis URL expires after 10 minutes.
+          <p>
+          For details on how to interpret the data see the
+          <a href="http://developer.echonest.com/docs/v4/_static/AnalyzeDocumentation.pdf">
+            Analyzer Documentation</a>.
+
+          <h3> Questions </h3>
+          For more information on how to interpret analysis results contact
+          <a href='http://twitter.com/plamere'>@plamere</a> or
+          <a href='http://twitter.com/jonathanmarmor'>@jonathanmarmor</a>.
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div id="footer">
+    <div class="container text-center">
+      <p class="text-muted">
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>
