@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+import random
 
 import simplejson as json
 import pyen
@@ -69,6 +70,7 @@ def recurse(path):
     elif os.path.isdir(path):
         # print 'recursing', path
         contents = os.listdir(path)
+        random.shuffle(contents)
         for file in contents:
             new_path = os.path.join(path, file)
             recurse(new_path)
